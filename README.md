@@ -32,7 +32,7 @@ _Built with **TypeScript**, **AWS Lambda** (Serverless Framework) and designed f
 ## Quick Start
 
 ```bash
-git clone https://github.com/your-org/random-name-service.git
+git clone https://github.com/piarconcept/random-name-service.git
 cd random-name-service
 
 npm install
