@@ -62,19 +62,21 @@ Sample response:
 }
 ```
 
-Local Development
+## Local Development
 
 Command	Description
+
+```bash
 npm run offline	Run API locally with serverless-offline
 npm run build	Bundle with esbuild
 npm run test	Placeholder – add Jest tests here
+```
 
 No env vars needed in offline mode. For production, adjust serverless.yml.
 
-⸻
+## Project Layout
 
-Project Layout
-
+```bash
 .
 ├── serverless.yml          # Lambda/API definition
 ├── src
@@ -90,79 +92,15 @@ Project Layout
 │           ├── index.ts
 │           └── names-surnames.ts
 └── test.sh
+```
 
+## Adding / Tweaking Countries
 
-⸻
-
-Adding / Tweaking Countries
-	1.	Create dataset: src/data/<iso>/names-surnames.ts
-
-export const namesSurnames = {
-  man: [/* … */],
-  woman: [/* … */],
-  unisex: [/* … */],
-  surnames: [/* … */]
-} as const;
-
-	2.	Create country object: src/data/<iso>/index.ts
-
-import { namesSurnames } from './names-surnames';
-
-export const XX = {
-  maleNames: namesSurnames.man,
-  femaleNames: namesSurnames.woman,
-  unisexNames: namesSurnames.unisex,
-  surnames: namesSurnames.surnames,
-  immigrationRate: 0.12,
-  immigrationSources: ['US', 'BR'],
-  rules: { firstName: 100, secondName: 40, thirdName: 0, surname1: 100, surname2: 5 }
-} as const;
-
-	3.	Register in src/country-data.ts
-
-import { XX } from './data/xx';
-export const COUNTRY_DATA = { …, XX };
-
-That’s all – no other code changes needed.
-
-⸻
-
-Testing
-
-Recommended test cases:
-	•	Probability distribution for dual surname / second name
-	•	Unsupported country error thrown
-	•	Ancestry array always length 4 in correct order
-
-Jest + ts-jest works out of the box.
-
-⸻
-
-Deployment
-
-# AWS credentials configured (env vars or ~/.aws/credentials)
-npm run deploy          # serverless deploy
-
-Optionally configure a custom domain (API Gateway) in serverless.yml.
-
-⸻
-
-Roadmap
-	•	RTL & non-Latin scripts (Arabic, Cyrillic, Han)
-	•	Optional seed for reproducible outputs
-	•	CLI tool (npx random-name --country=MX)
-	•	Docker image for on-prem use
-	•	Web playground
-
-⸻
-
-Contributing
-	1.	Fork → git checkout -b feat/your-branch
-	2.	Commit → git commit -am 'Add 🇨🇦 Canada dataset'
-	3.	Push → open PR
-	4.	Ensure CI passes
-
-⸻
+To add or modify a country:
+1. Create a new folder in `src/data/` named after the ISO country code (e.g., `es`, `ma`, `us`).
+2. Add `index.ts` with the country data structure.
+3. Add `names-surnames.ts` with arrays of names and surnames.
+4. Update `src/country-data.ts` to include your new country.
 
 License
 
