@@ -1,0 +1,34 @@
+service: random-name-service
+frameworkVersion: '3'
+useDotenv: true
+
+app: random-name-service
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-west-1
+  stage: ${opt:stage, 'dev'}
+  environment:
+    NODE_ENV: ${opt:stage, 'dev'}
+
+functions:
+  generateName:
+    handler: src/handler.generateName
+    events:
+      - httpApi:
+          path: /random-name-service/generate-name
+          method: POST
+
+plugins:
+  - serverless-offline
+  - serverless-esbuild
+
+custom:
+  esbuild:
+    bundle: true
+    platform: node
+    target: node18
+    concurrency: 10
+    sourcemap: true
+    external: []

@@ -1,0 +1,24 @@
+{
+  "name": "random-name-service",
+  "version": "1.0.0",
+  "description": "Name generator by country, age-range & sex",
+  "main": "index.js",
+  "scripts": {
+    "build": "serverless package",
+    "offline": "serverless offline",
+    "deploy": "serverless deploy",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "dependencies": {
+    "aws-lambda": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.149",
+    "@types/node": "^22.15.17",
+    "esbuild": "^0.25.4",
+    "serverless": "^3.40.0",
+    "serverless-esbuild": "^1.55.0",
+    "serverless-offline": "^12.0.4",
+    "typescript": "^5.8.3"
+  }
+}
